@@ -1,0 +1,60 @@
+version: '3'
+
+services:
+
+  # nginx-apps:
+  #   image: jwilder/nginx-proxy
+  #   ports:
+  #     - "80:80"
+  #     - "443:443"
+  #   restart: unless-stopped
+  #   environment:
+  #     - ENABLE_IPV6=true
+  #   volumes:
+  #     - /var/run/docker.sock:/tmp/docker.sock:ro
+  #     - ./certs/:/etc/nginx/certs
+  #   networks:
+  #     - back
+
+
+  db:
+    image: mysql:5.7
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: victor
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: wordpress
+    # networks:
+    #   - back
+  
+  wordpress:
+    depends_on:
+      - db
+    image: wordpress:latest
+    ports:
+      - "8888:80"
+    # expose:
+    #   - 80
+    #   - 443
+    restart: always
+    volumes:
+      - ./html:/var/www/html
+    environment:
+      # VIRTUAL_HOST: incubus.ml
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
+      WORDPRESS_DB_NAME: wordpress
+      WORDPRESS_FS_METHOD: direct
+
+    # networks:
+    #   - back
+
+
+# networks:
+#   back:
+volumes:
+    db_data: {}
