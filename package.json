@@ -14,7 +14,7 @@
   "dependencies": {
     "js-yaml": "^3.13.1",
     "sirv-cli": "^0.4.4",
-    "jquery": ">=1.10",
+    "jquery": ">=3.5",
     "jquery-ui": ">=1.11"
   },
   "scripts": {
