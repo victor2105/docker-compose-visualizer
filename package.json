@@ -15,7 +15,7 @@
     "js-yaml": "^3.13.1",
     "sirv-cli": "^0.4.4",
     "jquery": ">=1.10",
-    "jquery-ui": ">=1.11"
+    "jquery-ui": ">=1.13"
   },
   "scripts": {
     "build": "rollup -c",
